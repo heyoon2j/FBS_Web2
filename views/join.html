@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입</title>
+  <style>
+    @import url(./../css/default.css);
+    .a11y-hidden,
+    legend {
+      overflow: hidden;
+      position: absolute !important;
+      clip: rect(0, 0, 0, 0);
+      clip-path: polygon(0 0, 0 0, 0 0);
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+    }
+    body{
+      background-color: #333;
+      margin: 0;
+    }
+    .member {
+    color: #fefefe;
+    padding: 20px;
+  }
+  .join{
+    width: 540px;
+    margin: 0 auto;
+  }
+  .member-headline,
+  .member-text {
+    line-height: 1.5;
+    text-align: center;
+    margin: 0;
+  }
+  .member-headline {
+    font-size: 3.6rem;
+    font-weight: 100;
+    margin-top: 50px;
+    margin-bottom: 24px;
+  }
+  .member-text[lang='en'] {
+    font-size: 1.8rem;
+  }
+
+  .member-text {
+    font-size: 1.2rem;
+  }
+  .member-form {
+    margin-top: 114px;
+    margin-bottom: 30px;
+  }
+  .member-id,
+.member-password {
+  position: relative;
+  height: 48px;
+  transition: all 300ms;
+}
+.member-id.is--invalid,
+.member-password.is--invalid {
+  height: 70px;
+}
+.member-id,
+.member-password {
+  margin-bottom: 30px;
+}
+.member-form input {
+  width: 100%;
+  /* height: 40px; */
+  padding: 1.5em 0.5em 0.5em;
+  background-color: transparent;
+  border: 0;
+  color: #fefefe;
+  border-bottom: 1px solid #fefefe;
+  /* border-bottom: 1px solid rgba(254, 254, 254, 0.5); */
+}
+.is--invalid input {
+  border-bottom-width: 2px;
+}
+.member-id--error,
+.member-password--error {
+  display: none;
+  font-size: 1.2rem;
+  padding: 3px 0 3px 8px;
+}
+.is--invalid .member-id--error,
+.is--invalid .member-password--error {
+  display: block;
+}
+.is--valid::after,
+.is--invalid::after,
+.is--visible::after {
+  content: "";
+  position: absolute;
+  top: 24px;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+}
+.is--valid.member-id::after,
+.is--valid.member-password::after {
+  background-image: url(../images/icon-checked.svg);
+}
+.is--invalid.member-id::after,
+.is--invalid.member-password::after {
+  background-image: url(../images/icon-warning.svg);
+}
+.member-id label,
+.member-password label {
+  position: absolute;
+  top: 18px;
+  left: 8px;
+  transition: all 300ms;
+}
+
+.is--focus label,
+.is--valid label,
+.is--invalid label {
+  font-size: 1.3rem;
+  transform: translate(-8px, -20px);
+}
+.button-password {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  top: 18px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
+.is--focus .button-password,
+.is--invalid .button-password,
+.is--valid .button-password {
+  display: block;
+}
+
+.is--focus .button-password {
+  right: 4px;
+}
+
+.is--invalid .button-password,
+.is--valid .button-password {
+  right: 28px;
+}
+
+.button-password .ir {
+  display: inline-block;
+  /* padding: 4px; */
+  width: inherit;
+  height: inherit;
+  background: url(../images/icon-visible.svg) no-repeat 50% 50%;
+}
+
+.is--visible .button-password .ir {
+  background-image: url(../images/icon-invisible.svg);
+}
+  </style>
+</head>
+<body>
+  <main>
+    <section class="member join">
+      <h2 class="member-headline">회원가입</h2>
+      <p class="member-text" lang="en">Join Us, Ediya Coffee</p>
+      <p class="member-text">이디야멤버스 가입을 진행합니다.</p>
+      <form action="#" method="POST" class="member-form">
+        <fieldset>
+          <legend>회원가입 폼</legend>
+          <div class="member-id is--valid">
+            <label for="userEmail">이메일</label>
+            <input
+                   type="email"
+                   id="userEmail"
+                   name="userEmail"
+                   aria-required="true"
+                   aria-invalid="false"
+                   aria-describedby="emailErrorFeedback" />
+            <span
+                  role="alert"
+                  id="emailErrorFeedback"
+                  class="member-id--error">이메일 입력 방법이 잘못되었습니다. (예: user@domain.io)</span>
+          </div>
+          <div class="member-password is--invalid is--visible">
+            <label for="userPassword">패스워드</label>
+            <input
+                   type="password"
+                   id="userPassword"
+                   name="userPassword"
+                   aria-required="true"
+                   aria-invalid="false"
+                   aria-describedby="passwordErrorFeedback" />
+            <span
+                  role="alert"
+                  id="passwordErrorFeedback"
+                  class="member-password--error">패스워드는 숫자, 영어 조합 6자 이상 입력해야 합니다.</span>
+            <button type="button" class="is--visible button button-password" aria-label="패스워드 보기"><span class="ir"></span></button>
+          </div>
+          <!-- 패스워드 확인의 경우 기존 패스워드와 일치하는지 여부를 검증하기 위한 자바스크립트가 필요함. -->
+          <div class="member-password">
+            <label for="userPasswordCheck">패스워드 확인</label>
+            <input
+                   type="password"
+                   id="userPasswordCheck"
+                   name="userPasswordCheck"
+                   aria-required="true"
+                   aria-invalid="false"
+                   aria-describedby="passwordConfirmErrorFeedback" />
+            <span
+                  role="alert"
+                  id="passwordConfirmErrorFeedback"
+                  class="member-password--error">패스워드가 일치하지 않습니다.</span>
+            <button type="button" class="button button-password" aria-label="패스워드 보기"><span class="ir"></span></button>
+          </div>
+          <div class="button-container is--disabled">
+            <button type="submit" class="button-signup button-fill" disabled>가입하기</button>
+            <a href="./login.html" class="button-login button-stroke">로그인</a>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
